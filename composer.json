@@ -1,0 +1,13 @@
+{
+  "name": "lois/328/diner",
+  "description": "My MVC Diner Application",
+  "authors": [
+    {
+      "name": "Lois Lanctot",
+      "email": "lanctot.lois@student.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
