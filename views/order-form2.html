@@ -8,7 +8,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/diner-styles.css">
 
     <title>My Diner</title>
 </head><body>
@@ -21,22 +21,12 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Select condiments</label>
             <div class="col-sm-4">
-                <label><input type="checkbox"
-                              name="conds[]"
-                              value="ketchup"
-                > ketchup</label><br>
-                <label><input type="checkbox"
-                              name="conds[]"
-                              value="mustard"
-                > mustard</label><br>
-                <label><input type="checkbox"
-                              name="conds[]"
-                              value="mayo"
-                > mayo</label><br>
-                <label><input type="checkbox"
-                              name="conds[]"
-                              value="sriracha"
-                > sriracha</label><br>
+                <repeat group="{{ @condiments }}" value="{{ @condiment }}">
+                        <label><input type="checkbox"
+                                      name="conds[]"
+                                      value="{{ @condiment }}"
+                        > {{ ucwords(@condiment) }}</label><br>
+                </repeat>
                 <!-- Display an error if there is one -->
             </div>
         </div>
