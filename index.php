@@ -76,15 +76,6 @@ $f3->route('GET|POST /order1', function($f3) {
 });
 
 
-//Define a summary route
-$f3->route('GET /summary', function() {
-//    echo "Thanks for your order";
-
-//    Display a view page
-    $view = new Template();
-    echo $view->render('views/order-summary.html');
-});
-
 
 //Define an order route
 $f3->route('GET|POST /order2', function($f3) {
@@ -93,12 +84,10 @@ $f3->route('GET|POST /order2', function($f3) {
     //if the form has been posted
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // validate the data
-        $food = $_POST['food'];
-        $meal = $_POST['meal'];
+        $conds = $_POST['conds'];
 
         // put the data in the session array
-        $f3->set('SESSION.food', $food);
-        $f3->set('SESSION.meal', $meal);
+        $f3->set('SESSION.conds', $conds);
 
         // redirect to summary route
         $f3->reroute('summary');
@@ -109,6 +98,17 @@ $f3->route('GET|POST /order2', function($f3) {
 //    Display a view page
     $view = new Template();
     echo $view->render('views/order-form2.html');
+});
+
+
+
+//Define a summary route
+$f3->route('GET /summary', function() {
+//    echo "Thanks for your order";
+
+//    Display a view page
+    $view = new Template();
+    echo $view->render('views/order-summary.html');
 });
 
 
