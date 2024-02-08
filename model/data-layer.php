@@ -6,7 +6,7 @@
  */
 
 function getMeals() {
-    return array('Breakfast', 'Brunch', 'Lunch', 'Diner');
+    return array('breakfast', 'brunch', 'lunch', 'diner');
 }
 
 
