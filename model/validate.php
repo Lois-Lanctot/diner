@@ -5,7 +5,8 @@
  * validate data for the diner app
  */
 
-class Validate {
+class Validate
+{
 
     //return true if food is valid
     //trim removes leading or trailing white space

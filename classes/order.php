@@ -6,7 +6,8 @@
  * @copyright 2024
  */
 
-class Order {
+class Order
+{
     private $_food;
     private $_meal;
     private $_condiments;
