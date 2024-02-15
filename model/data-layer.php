@@ -5,11 +5,13 @@
  * 328/diner/model/data-layer.php
  */
 
-function getMeals() {
-    return array('breakfast', 'brunch', 'lunch', 'diner');
-}
+class DataLayer {
+    static function getMeals() {
+        return array('breakfast', 'brunch', 'lunch', 'diner');
+    }
 
 
-function getCondiments() {
-    return array('ketchup', 'mustard', 'mayo', 'sriracha');
+    static function getCondiments() {
+        return array('ketchup', 'mustard', 'mayo', 'sriracha');
+    }
 }

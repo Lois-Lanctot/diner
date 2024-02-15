@@ -12,8 +12,18 @@ error_reporting(E_ALL);
 
 //Require the autoload file
 require_once ('vendor/autoload.php');
-require_once ('model/data-layer.php');
-require_once ('model/validate.php');
+
+//test my order class
+//$order = new Order("pizza", "breakfast");
+//var_dump($order);
+
+//test my DataLayer class
+//var_dump(DataLayer::getMeals());
+//var_dump(DataLayer::getCondiments());
+
+
+//test my Validate class
+//echo Validate::validMeal('aloe gobi');
 
 
 //Instantiate F3
@@ -58,14 +68,14 @@ $f3->route('GET|POST /order1', function($f3) {
     //if the form has been posted
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // validate the data
-        if (validFood($_POST['food'])) {
+        if (Validate::validFood($_POST['food'])) {
             $food = $_POST['food'];
         }
         else {
             $f3->set('errors["food"]', "Invalid food");
         }
 
-        if (isset($_POST['meal']) and validMeal($_POST['meal'])) {
+        if (isset($_POST['meal']) and Validate::validMeal($_POST['meal'])) {
             $meal = $_POST['meal'];
         }
         else {
@@ -74,10 +84,13 @@ $f3->route('GET|POST /order1', function($f3) {
 
         // if there are no errors
         if (empty($f3->get('errors'))) {
-            // put the data in the session array
-            $f3->set('SESSION.food', $food);
-            $f3->set('SESSION.meal', $meal);
+            //instantiate an Order object
+            $order = new Order($food, $meal);
 
+            // put the data in the session array
+            $f3->set('SESSION.order', $order);
+
+//            var_dump($f3->get('SESSION.order'));
             // redirect to order2 route
             $f3->reroute('order2');
         }
@@ -85,7 +98,7 @@ $f3->route('GET|POST /order1', function($f3) {
     }
 
     //add data to the F3 "hive"
-    $f3->set('meals', getMeals());
+    $f3->set('meals', DataLayer::getMeals());
 
     //  Display a view page
     $view = new Template();
@@ -99,16 +112,26 @@ $f3->route('GET|POST /order2', function($f3) {
     //if the form has been posted
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // validate the data
-        $conds = $_POST['conds'];
+        $conds = "";
+
+        if(isset($_POST['conds'])) {
+            $conds = implode(", ", $_POST['conds']);
+        }
+        else {
+            $conds = "None selected";
+        }
 
         // put the data in the session array
-        $f3->set('SESSION.conds', $conds);
+
+        $f3->get('SESSION.order')->setCondiments($conds);
+//        var_dump($f3->get('SESSION.order'));
+
 
         // redirect to summary route
         $f3->reroute('summary');
     }
 
-    $f3->set('condiments', getCondiments());
+    $f3->set('condiments', DataLayer::getCondiments());
 
 //    Display a view page
     $view = new Template();

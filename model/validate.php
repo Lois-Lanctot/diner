@@ -5,20 +5,16 @@
  * validate data for the diner app
  */
 
-//return true if food is valid
-//trim removes leading or trailing white space
-function validFood($food) {
-    if (trim($food) == "") {
-        return false;
-    }
-    if (!ctype_alpha($food)) {
-        return false;
+class Validate {
+
+    //return true if food is valid
+    //trim removes leading or trailing white space
+    static function validFood($food) {
+        return trim($food) != "";
     }
 
-    return true;
-}
 
-
-function validMeal($meal) {
-    return in_array($meal, getMeals());
+    static function validMeal($meal) {
+        return in_array($meal, DataLayer::getMeals());
+    }
 }
