@@ -8,6 +8,7 @@
 
 class Order
 {
+    private $_orderId;
     private $_food;
     private $_meal;
     private $_condiments;
@@ -24,6 +25,22 @@ class Order
         $this->_food = $food;
         $this->_meal = $meal;
         $this->_condiments = $condiments;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrderId()
+    {
+        return $this->_orderId;
+    }
+
+    /**
+     * @param mixed $orderId
+     */
+    public function setOrderId($orderId)
+    {
+        $this->_orderId = $orderId;
     }
 
 

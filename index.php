@@ -7,16 +7,6 @@
  */
 
 
-//CREATE TABLE orders (
-//    order_id INT(8) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-//    food VARCHAR(50),
-//    meal VARCHAR(20),
-//    condiments VARCHAR (50),
-//    date_time DATETIME DEFAULT NOW()
-//);
-//INSERT INTO orders (food, meal, condiments) VALUES ('bagels', 'breakfast', 'cream cheese');
-//INSERT INTO orders (food, meal, condiments) VALUES ('hot dog', 'lunch', 'relish, mustard, sauerkraut');
-//INSERT INTO orders (food, meal, condiments) VALUES ('pad thai', 'dinner', NULL);
 
 
 //Turn on error reporting
@@ -42,6 +32,14 @@ require_once ('vendor/autoload.php');
 //Instantiate F3
 $f3 = Base::instance();
 $con = new Controller($f3);
+
+//Instantiate DataLayer class
+$dataLayer = new DataLayer();
+
+//Test DataLayer class
+//echo "<pre>";
+//var_dump($dataLayer->getOrders());
+//echo "</pre>";
 
 
 //Define a default route
@@ -84,7 +82,7 @@ $f3->route('GET /summary', function() {
 });
 
 //Define a summary route
-$f3->route('GET /view', function() {
+$f3->route('GET /view-orders', function() {
     $GLOBALS['con']->view();
 });
 
